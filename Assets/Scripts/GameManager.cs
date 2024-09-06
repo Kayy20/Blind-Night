@@ -116,6 +116,11 @@ public class GameManager : MonoBehaviour
         levelText.gameObject.SetActive(false);
     }
 
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void LoadLevel(string name)
     {
         SceneManager.LoadScene(name);

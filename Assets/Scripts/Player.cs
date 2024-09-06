@@ -29,14 +29,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
         {
             throwForce = Mathf.Clamp(throwForce + Time.deltaTime * 50, minThrowForce, maxThrowForce);
             circleBar.fillAmount = throwForce / maxThrowForce;    
             // update a circle slider to show the throw force
 
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
         {
             Vector3 throwDirection = fpc.playerCamera.transform.forward; // Direction from you
             GameObject thrownSonar = Instantiate(sonarShot, fpc.playerCamera.transform.position, Quaternion.identity);
