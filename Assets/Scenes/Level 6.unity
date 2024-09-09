@@ -520,7 +520,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: ab78fe64f8877ba429edd38dbf4e0bb5, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!65 &566405771
 BoxCollider:
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: d95ce581416d85246b612f79da5560b6, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!65 &630663104
 BoxCollider:
@@ -922,7 +922,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: f6b811c8a191c4846bae4c76bcc41a17, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!65 &721198741
 BoxCollider:
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 5be1ad3ccbbc0f14f961329b56c56263, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 8046945505c017d4f80c629f6e55e143, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &832575517
 GameObject:
@@ -1730,7 +1730,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 5ca121fe0a66eb0488dfb504cf7d7572, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!65 &1686466999
 BoxCollider:
@@ -2070,7 +2070,7 @@ PrefabInstance:
     - target: {fileID: 8002039141194315500, guid: bc267e8043174bb459743590c9d7ac5b,
         type: 3}
       propertyPath: nextLevel
-      value: Level 6
+      value: Level 7
       objectReference: {fileID: 0}
     - target: {fileID: 8186545762135305209, guid: bc267e8043174bb459743590c9d7ac5b,
         type: 3}

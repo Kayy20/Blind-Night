@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     public Bounds boundaries;
 
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
 
     [SerializeField]
     private List<Vector3> roamingPoints = new List<Vector3>();
@@ -45,6 +45,8 @@ public class Enemy : MonoBehaviour
 
         agent.SetDestination(roamingPoints[currentRoamingPointHeadTo]);
 
+        agent.speed = 3.5f;
+
     }
 
 
@@ -52,7 +54,15 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.ReloadScene();
+            // Raycast towards the player to see if there is a wall in between
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, other.transform.position - transform.position, out hit))
+            {
+                if (hit.collider.gameObject.CompareTag("Player"))
+                {
+                    GameManager.Instance.ReloadScene();
+                }
+            }
         }
     }
 

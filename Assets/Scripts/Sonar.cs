@@ -21,5 +21,10 @@ public class Sonar : MonoBehaviour
         Debug.Log("Sonar hit: " + other.name);
         Instantiate(sonarPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        // signal to all tracking enemies that the sonar has been dropped
+        foreach (TrackingEnemy enemy in FindObjectsOfType<TrackingEnemy>())
+        {
+            enemy.SonarDrop(transform);
+        }
     }
 }
