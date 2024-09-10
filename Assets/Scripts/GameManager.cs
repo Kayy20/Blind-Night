@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
             player.transform.position = GameObject.Find("SpawnPoint").transform.position;
             // Display on screen what level they are on with fading text
             levelText.gameObject.SetActive(true);
-            levelText.CrossFadeAlpha(1, 0, false);
 
             if (s.name == "Tutorial")
             {
@@ -63,9 +62,10 @@ public class GameManager : MonoBehaviour
     // coroutine to fade text out
     private IEnumerator FadeText()
     {
+        levelText.CrossFadeAlpha(1, 1, false);
+        yield return new WaitForSeconds(1);
         levelText.CrossFadeAlpha(0, 2, false);
         yield return new WaitForSeconds(3);
-        levelText.CrossFadeAlpha(1, 0, false);
         levelText.gameObject.SetActive(false);
     }
 
