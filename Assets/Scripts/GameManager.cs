@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("Title");
     }
 
     void OnSceneLoaded(Scene s, LoadSceneMode mode)
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
         if (s.name != "Title")
         {
+            player.SetActive(true);
             player.transform.position = GameObject.Find("SpawnPoint").transform.position;
             // Display on screen what level they are on with fading text
             levelText.gameObject.SetActive(true);
