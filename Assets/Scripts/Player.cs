@@ -29,35 +29,37 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
+        if (!GameManager.Instance.Paused)
         {
-            throwForce = Mathf.Clamp(throwForce + Time.deltaTime * 50, minThrowForce, maxThrowForce);
-            circleBar.fillAmount = throwForce / maxThrowForce;    
-            // update a circle slider to show the throw force
-
-        }
-        if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
-        {
-            Vector3 throwDirection = fpc.playerCamera.transform.forward; // Direction from you
-            GameObject thrownSonar = Instantiate(sonarShot, fpc.playerCamera.transform.position, Quaternion.identity);
-            thrownSonar.GetComponent<Sonar>().Throw(throwDirection, throwForce);
-            circleBar.fillAmount = 0;
-            throwForce = 0;
-        }
-        //if (Input.GetMouseButtonUp(1))
-        //{
-        //    GameObject thrownSonar = Instantiate(sonar, transform.position, Quaternion.identity);
-        //}
-
-        if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
-        {
-            walkCycleTimer += Time.deltaTime;
-            if (walkCycleTimer >= walkCycle)
+            if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
             {
-                walkCycleTimer = 0;
-                Instantiate(sonar, transform.position, Quaternion.identity);
+                throwForce = Mathf.Clamp(throwForce + Time.deltaTime * 50, minThrowForce, maxThrowForce);
+                circleBar.fillAmount = throwForce / maxThrowForce;
+                // update a circle slider to show the throw force
+
+            }
+            if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
+            {
+                Vector3 throwDirection = fpc.playerCamera.transform.forward; // Direction from you
+                GameObject thrownSonar = Instantiate(sonarShot, fpc.playerCamera.transform.position, Quaternion.identity);
+                thrownSonar.GetComponent<Sonar>().Throw(throwDirection, throwForce);
+                circleBar.fillAmount = 0;
+                throwForce = 0;
+            }
+            //if (Input.GetMouseButtonUp(1))
+            //{
+            //    GameObject thrownSonar = Instantiate(sonar, transform.position, Quaternion.identity);
+            //}
+
+            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            {
+                walkCycleTimer += Time.deltaTime;
+                if (walkCycleTimer >= walkCycle)
+                {
+                    walkCycleTimer = 0;
+                    Instantiate(sonar, transform.position, Quaternion.identity);
+                }
             }
         }
-
     }
 }

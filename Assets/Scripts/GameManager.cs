@@ -10,7 +10,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+
+    public bool Paused { get; private set; }
+
     public GameObject player;
+
+    public GameObject pauseScreen;
+    public GameObject eventSys;
+    public GameObject devConsole;
+    public bool dev;
+
 
     [SerializeField] private TMP_Text levelText;
 
@@ -27,15 +36,37 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(pauseScreen);
+        DontDestroyOnLoad(eventSys);
         DontDestroyOnLoad(player);
-
-        Debug.Log(Instance.name);
     }
 
     private void Start()
     {
+        pauseScreen.SetActive(false);
+        //devConsole.SetActive(false);
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene("Title");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (SceneManager.GetActiveScene().name != "Title")
+            {
+                if (Time.timeScale == 0)
+                {
+                    pauseScreen.SetActive(false);
+                    ResumeGame();
+                }
+                else
+                {
+                    PauseGame();
+                }
+            }
+        }
     }
 
     void OnSceneLoaded(Scene s, LoadSceneMode mode)
@@ -126,4 +157,33 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
+        Paused = true;
+        player.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        Paused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        player.SetActive(true);
+    }
+
+
+    public void EndGame()
+    {
+        Debug.Log("Game Over");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
 }

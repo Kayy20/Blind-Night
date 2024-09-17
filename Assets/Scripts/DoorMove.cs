@@ -10,11 +10,21 @@ public class DoorMove : MonoBehaviour
     private bool movingToTarget;
     private Vector3 startPosition;
 
+    public bool time;
+    public float timeToClose;
+
     private void Start()
     {
         startPosition = transform.position;
         targetPosition = startPosition + targetPosition;
-        StartCoroutine(MoveDoorConstantly());
+        if (time)
+        {
+            StartCoroutine(CloseDoor());
+        }
+        else
+        {
+            StartCoroutine(MoveDoorConstantly());
+        }
     }
 
     private IEnumerator MoveDoorConstantly()
@@ -29,6 +39,53 @@ public class DoorMove : MonoBehaviour
             else
             {
                 yield return StartCoroutine(MoveToPosition(startPosition));
+            }
+
+            // Wait for the specified time at each position
+            yield return new WaitForSeconds(waitTime);
+
+            // Switch movement direction
+            movingToTarget = !movingToTarget;
+        }
+    }
+    
+    private IEnumerator CloseDoor()
+    {
+
+        float elapsedTime = 0f;
+
+        while (true)
+        {
+            // Move to the target or start position depending on the current state
+            if (movingToTarget)
+            {
+                while (elapsedTime < timeToClose)
+                {
+
+                   // Increment the timer (elapsedTime)
+                    elapsedTime += Time.deltaTime;
+
+                    float t = Mathf.Clamp01(elapsedTime / timeToClose);
+
+                    transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+
+                    yield return null;
+                }
+            }
+            else
+            {
+                while (elapsedTime > 0)
+                {
+
+                    // Increment the timer (elapsedTime)
+                    elapsedTime -= Time.deltaTime;
+
+                    float t = Mathf.Clamp01(elapsedTime / timeToClose);
+
+                    transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+
+                    yield return null;
+                }
             }
 
             // Wait for the specified time at each position
