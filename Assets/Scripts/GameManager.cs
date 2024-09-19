@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject devConsole;
     public bool dev;
 
+    int currentLevel = 0;
 
     [SerializeField] private TMP_Text levelText;
 
@@ -67,6 +68,14 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        if (dev)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                currentLevel++;
+                LoadLevel("Level " + currentLevel);
+            }
+        }
     }
 
     void OnSceneLoaded(Scene s, LoadSceneMode mode)
@@ -78,6 +87,8 @@ public class GameManager : MonoBehaviour
             player.transform.position = GameObject.Find("SpawnPoint").transform.position;
             // Display on screen what level they are on with fading text
             levelText.gameObject.SetActive(true);
+
+            currentLevel = int.Parse(SceneManager.GetActiveScene().name.Split(' ')[1]);
 
             if (s.name == "Tutorial")
             {

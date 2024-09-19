@@ -2060,6 +2060,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elevator
       objectReference: {fileID: 0}
+    - target: {fileID: 2542141586569250949, guid: 445d612cbac559d488a5e0c319018aff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3929218019449944960, guid: 445d612cbac559d488a5e0c319018aff,
         type: 3}
       propertyPath: m_Enabled
@@ -2588,6 +2593,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Elevator (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542141586569250949, guid: 445d612cbac559d488a5e0c319018aff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3929218019449944960, guid: 445d612cbac559d488a5e0c319018aff,
         type: 3}
