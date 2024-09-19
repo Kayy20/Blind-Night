@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     private int currentRoamingPointHeadTo;
     public int numOfRoamingPoints;
 
+    public float speed = 3.5f;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -45,7 +47,7 @@ public class Enemy : MonoBehaviour
 
         agent.SetDestination(roamingPoints[currentRoamingPointHeadTo]);
 
-        agent.speed = 3.5f;
+        agent.speed = speed;
 
     }
 

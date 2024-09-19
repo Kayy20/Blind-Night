@@ -988,13 +988,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3026189268669923263, guid: 29bea5c4b6f24a74f92765574037d2d3,
         type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3026189268669923263, guid: 29bea5c4b6f24a74f92765574037d2d3,
+        type: 3}
       propertyPath: numOfRoamingPoints
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4251631843037254340, guid: 29bea5c4b6f24a74f92765574037d2d3,
         type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7295634367591383996, guid: 29bea5c4b6f24a74f92765574037d2d3,
         type: 3}
@@ -1045,6 +1050,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732615542797938904, guid: 29bea5c4b6f24a74f92765574037d2d3,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
