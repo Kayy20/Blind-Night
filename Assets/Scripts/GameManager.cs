@@ -108,7 +108,13 @@ public class GameManager : MonoBehaviour
         levelText.CrossFadeAlpha(1, 1, false);
         yield return new WaitForSeconds(1);
         levelText.CrossFadeAlpha(0, 2, false);
+        if (currentLevel == 15)
+        {
+            levelText.CrossFadeColor(Color.red, 1, false, false);
+        }
+
         yield return new WaitForSeconds(3);
+        levelText.CrossFadeColor(Color.white, 0, false, false);
         levelText.gameObject.SetActive(false);
     }
 
@@ -131,7 +137,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         levelText.CrossFadeAlpha(1, 1, false);
 
-        levelText.text = "Left Click to sense, hold to throw further";
+        levelText.text = "Left Click to throw a sonar, hold to throw further";
         yield return new WaitForSeconds(1);
         levelText.CrossFadeAlpha(0, 2, false);
         yield return new WaitForSeconds(3);
