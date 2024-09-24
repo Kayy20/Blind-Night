@@ -17,10 +17,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject pauseScreen;
     public GameObject eventSys;
-    public GameObject devConsole;
     public bool dev;
 
     int currentLevel = 0;
+
+    public L15Manager l15Manager;
+
+    public LevelScene StartLevel;
 
     [SerializeField] private TMP_Text levelText;
 
@@ -48,7 +51,7 @@ public class GameManager : MonoBehaviour
         //devConsole.SetActive(false);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene((int)StartLevel);
     }
 
     private void Update()
@@ -87,15 +90,14 @@ public class GameManager : MonoBehaviour
             player.transform.position = GameObject.Find("SpawnPoint").transform.position;
             // Display on screen what level they are on with fading text
             levelText.gameObject.SetActive(true);
-
-            currentLevel = int.Parse(SceneManager.GetActiveScene().name.Split(' ')[1]);
+            
 
             if (s.name == "Tutorial")
             {
                 StartCoroutine(TutorialFadeText());
             } else
             {
-
+                currentLevel = int.Parse(SceneManager.GetActiveScene().name.Split(' ')[1]);
                 levelText.text = s.name;
                 StartCoroutine(FadeText());
             }
@@ -106,12 +108,16 @@ public class GameManager : MonoBehaviour
     private IEnumerator FadeText()
     {
         levelText.CrossFadeAlpha(1, 1, false);
+
         yield return new WaitForSeconds(1);
-        levelText.CrossFadeAlpha(0, 2, false);
         if (currentLevel == 15)
         {
-            levelText.CrossFadeColor(Color.red, 1, false, false);
+            levelText.CrossFadeColor(Color.red, 1, false, true);
+            yield return new WaitForSeconds(1);
         }
+        levelText.CrossFadeAlpha(0, 2, false);
+
+        
 
         yield return new WaitForSeconds(3);
         levelText.CrossFadeColor(Color.white, 0, false, false);
@@ -165,14 +171,39 @@ public class GameManager : MonoBehaviour
         levelText.gameObject.SetActive(false);
     }
 
+    [Space(20)]
+    [SerializeField] GameObject bossDamagePrefab;
 
-    public void ReloadScene()
+    public void DamageBoss()
+    {
+        // Spawn Cube and drop on boss
+        Instantiate(bossDamagePrefab, new Vector3(0, 20, 0), Quaternion.identity);
+    }
+
+    public void ReloadScene(bool atBoss = false)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (atBoss)
+        {
+            StartCoroutine(WaitForLevelLoad());
+        }
     }
+
+    private IEnumerator WaitForLevelLoad()
+    {
+        yield return new WaitForSeconds(1);
+        l15Manager.RestartBoss();
+    }
+
     public void LoadLevel(string name)
     {
-        SceneManager.LoadScene(name);
+        if (currentLevel == 15 && l15Manager)
+        {
+            l15Manager.NextLevel();
+        } else
+        {
+            SceneManager.LoadScene(name);
+        }
     }
 
     private void PauseGame()
@@ -202,5 +233,28 @@ public class GameManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+}
+
+public enum LevelScene
+{
+    None,
+    Title,
+    Tutorial,
+    Level_1,
+    Level_2,
+    Level_3,
+    Level_4,
+    Level_5,
+    Level_6,
+    Level_7,
+    Level_8,
+    Level_9,
+    Level_10,
+    Level_11,
+    Level_12,
+    Level_13,
+    Level_14,
+    Level_15,
 
 }

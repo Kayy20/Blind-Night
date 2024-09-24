@@ -674,7 +674,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 69.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1057,9 +1057,12 @@ MonoBehaviour:
   player: {fileID: 401963209}
   pauseScreen: {fileID: 589112510}
   eventSys: {fileID: 1447066685}
-  devConsole: {fileID: 1447066685}
   dev: 1
+  l15Manager: {fileID: 0}
+  StartLevel: 1
   levelText: {fileID: 619920474}
+  bossDamagePrefab: {fileID: 8005126332172528588, guid: bf4904250ff5c824ba07040899ddc341,
+    type: 3}
 --- !u!1 &1945003357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1148,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 69.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

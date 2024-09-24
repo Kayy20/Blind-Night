@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class L15Manager : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    [SerializeField] int currentLevel = 0;
+
+    public List<GameObject> levelGameObjects = new List<GameObject>();
+
     void Start()
     {
-        
+        GameManager.Instance.l15Manager = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void NextLevel()
     {
-        
+        levelGameObjects[currentLevel].SetActive(false);
+        currentLevel++;
+        levelGameObjects[currentLevel].SetActive(true);
+
+        GameManager.Instance.player.transform.position = levelGameObjects[currentLevel].GetComponent<Level>().spawnpoint.position;
+
+    }
+
+    public void RestartBoss()
+    {
+        foreach (GameObject g in levelGameObjects)
+        {
+            g.SetActive(false);
+            if (g.name == "L15")
+            {
+                g.SetActive(true);
+            }
+        }
     }
 }
