@@ -130,6 +130,7 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         // Destroy the GameObject after the cycle completes
+        GameManager.Instance.GameWin();
         GetComponent<ExplodingCube>().Explode();
     }
 }

@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
 
-    public GameObject pauseScreen;
+    public GameObject pauseCanvas;
     public GameObject eventSys;
     public bool dev;
 
@@ -40,14 +40,14 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(pauseScreen);
+        DontDestroyOnLoad(pauseCanvas);
         DontDestroyOnLoad(eventSys);
         DontDestroyOnLoad(player);
     }
 
     private void Start()
     {
-        pauseScreen.SetActive(false);
+        pauseCanvas.SetActive(false);
         //devConsole.SetActive(false);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
             {
                 if (Time.timeScale == 0)
                 {
-                    pauseScreen.SetActive(false);
+                    pauseCanvas.SetActive(false);
                     ResumeGame();
                 }
                 else
@@ -209,7 +209,7 @@ public class GameManager : MonoBehaviour
     private void PauseGame()
     {
         Time.timeScale = 0;
-        pauseScreen.SetActive(true);
+        pauseCanvas.SetActive(true);
         Paused = true;
         player.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
@@ -223,6 +223,26 @@ public class GameManager : MonoBehaviour
         player.SetActive(true);
     }
 
+    [Space(20)]
+    [Header("Game Win Stuff")]
+    public GameObject gameWinScreen;
+    public GameObject pausePanel;
+
+    private IEnumerator WaitForSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Debug.Log("Done Waiting, Start End Scene");
+        player.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        pauseCanvas.SetActive(true);
+        SceneManager.LoadScene("Blank Scene");
+        pausePanel.SetActive(false);
+        gameWinScreen.SetActive(true);
+    }
+    public void GameWin()
+    {
+        StartCoroutine(WaitForSeconds(10));
+    }
 
     public void EndGame()
     {
@@ -232,6 +252,12 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void ToTitleScreen()
+    {
+
+        SceneManager.LoadScene("Title");
     }
 
 }
