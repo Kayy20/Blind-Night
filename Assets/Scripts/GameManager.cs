@@ -83,9 +83,10 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
-        StopAllCoroutines();
-        if (s.name != "Title")
+        
+        if (s.name != "Title" && s.name != "Blank Scene")
         {
+            StopAllCoroutines();
             player.SetActive(true);
             player.transform.position = GameObject.Find("SpawnPoint").transform.position;
             // Display on screen what level they are on with fading text
@@ -197,7 +198,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(string name)
     {
-        if (currentLevel == 15 && l15Manager)
+        if (l15Manager)
         {
             l15Manager.NextLevel();
         } else
@@ -231,11 +232,18 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitForSeconds(float time)
     {
         yield return new WaitForSeconds(time);
-        Debug.Log("Done Waiting, Start End Scene");
+
+        var async = SceneManager.LoadSceneAsync("Blank Scene");
+        
+
+        while (!async.isDone)
+        {
+            yield return null;
+        }
+
         player.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         pauseCanvas.SetActive(true);
-        SceneManager.LoadScene("Blank Scene");
         pausePanel.SetActive(false);
         gameWinScreen.SetActive(true);
     }

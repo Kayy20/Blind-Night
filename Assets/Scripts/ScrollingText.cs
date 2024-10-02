@@ -50,4 +50,5 @@ public class ScrollingText : MonoBehaviour
             button.interactable = true;
         }
     }
+
 }

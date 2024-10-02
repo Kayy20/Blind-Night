@@ -60,6 +60,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 15.unity
     guid: 7194ab75018f92947961a8b7bf6972b6
   - enabled: 1
-    path: Assets/Scenes/Blank Scene.unity
+    path: Assets/Scenes/Blank Screen.unity
     guid: b5a6fb642ff3dec4295d83949a1a93f0
   m_configObjects: {}
