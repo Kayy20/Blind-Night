@@ -91,7 +91,13 @@ public class GameManager : MonoBehaviour
             player.transform.position = GameObject.Find("SpawnPoint").transform.position;
             // Display on screen what level they are on with fading text
             levelText.gameObject.SetActive(true);
-            
+
+
+            if (reloadBoss)
+            {
+                StartCoroutine(WaitForLevelLoad());
+                reloadBoss = false;
+            }
 
             if (s.name == "Tutorial")
             {
@@ -175,6 +181,8 @@ public class GameManager : MonoBehaviour
     [Space(20)]
     [SerializeField] GameObject bossDamagePrefab;
 
+    private bool reloadBoss = false;
+
     public void DamageBoss()
     {
         // Spawn Cube and drop on boss
@@ -183,17 +191,16 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene(bool atBoss = false)
     {
+        reloadBoss = atBoss;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        if (atBoss)
-        {
-            StartCoroutine(WaitForLevelLoad());
-        }
     }
 
     private IEnumerator WaitForLevelLoad()
     {
-        yield return new WaitForSeconds(1);
+        yield return null;
         l15Manager.RestartBoss();
+        player.transform.position = GameObject.Find("SpawnPoint").transform.position;
+
     }
 
     public void LoadLevel(string name)
