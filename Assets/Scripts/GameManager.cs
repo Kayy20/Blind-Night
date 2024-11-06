@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
         
-        if (s.name != "Title" && s.name != "Blank Scene")
+        if (s.name != "Title" && s.name != "Blank Screen")
         {
             StopAllCoroutines();
             player.SetActive(true);
@@ -240,9 +240,9 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        var async = SceneManager.LoadSceneAsync("Blank Scene");
-        
+        var async = SceneManager.LoadSceneAsync("Blank Screen");
 
+        yield return new WaitForSeconds(0.5f); 
         while (!async.isDone)
         {
             yield return null;
